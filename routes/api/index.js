@@ -1,24 +1,23 @@
+
 const router = require('express').Router();
 const fs = require('fs');
 const path = require("path");
 
 let db = JSON.parse(fs.readFileSync(path.resolve(__dirname,'../../db/db.json')));
 
-
+//Assign unique IDs to the notes
 let maxId = 0;
-
 function updateMaxId(){
-
     for(const item of db ){
         maxId = Math.max(item.id,maxId);
     }
-
 }
 
 router.get('/notes', (req, res) => {
     res.json(db);
 })
 
+//Allow user to delete notes
 router.delete('/notes/:id', (req, res) => {
     
     const idToDelete = req.params.id;
@@ -28,13 +27,13 @@ router.delete('/notes/:id', (req, res) => {
         if(db[i].id != idToDelete){
             newDb.push(db[i]) ;
         }
-
     }
     db = newDb;
     saveDBFile();
     res.status(200).send('');
 })
 
+//user saves notes
 router.post('/notes', (req, res) => {
 
     const newNote = req.body;
@@ -55,19 +54,13 @@ function saveDBFile(){
           return
         }
         //file written successfully
-      });
-      
+      });    
 }
 
+//updates id so each one is unique
 function randomID(){
-
     return ++maxId;
 }
-
-//post request goes here to send the notes to db.json
-
-//it will come in as request.body
-
 
 updateMaxId();
 module.exports = router;
