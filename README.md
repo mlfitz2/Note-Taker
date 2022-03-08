@@ -1,7 +1,7 @@
 Note Taker
 
 GitHub Repository: https://github.com/mlfitz2/Note-Taker
-Deployed App: https://mikes-note-taking-app.herokuapp.com/notes
+Deployed App: https://mikes-note-taking-app.herokuapp.com
 
 This program is a note-taking app, which allows the user to enter a note and its title, and then save it for future reference. Notes can also be deleted by the user. 
 
